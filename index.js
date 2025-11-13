@@ -19,6 +19,14 @@ app.use('/api/users',userRoutes);
 app.use('/api/transactions',transactionRoutes);
 app.use('/api/trips',tripRoutes);
 app.use('/api/reports',reportRoutes);
+app.get('/', (req, res) => {
+    res.status(200).json({ 
+        success: true, 
+        message: "Welcome to the Expense Splitter API!",
+        version: "1.0"
+    });
+});
+
   
 mongoose.connect(MONGOURL).then(()=>{
   console.log("DB Connection successful");
