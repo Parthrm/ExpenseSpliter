@@ -1,0 +1,28 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const userRoutes = require("./routers/userRouter.js");
+const transactionRoutes = require("./routers/transactionRouter.js");
+const tripRoutes = require("./routers/tripRouter.js");
+const reportRoutes = require("./routers/reportRouter.js");
+const urlbp = require("body-parser");
+
+const app = express()
+dotenv.config();
+
+const PORT = process.env.PORT;
+const MONGOURL = process.env.MONGO_URL;
+
+app.use(urlbp.urlencoded({ extended: true }));
+app.use(express.json());
+app.use('/api/users',userRoutes);
+app.use('/api/transactions',transactionRoutes);
+app.use('/api/trips',tripRoutes);
+app.use('/api/reports',reportRoutes);
+  
+mongoose.connect(MONGOURL).then(()=>{
+  console.log("DB Connection successful");
+  app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`)
+  })
+}).catch((error)=>console.error(error));
