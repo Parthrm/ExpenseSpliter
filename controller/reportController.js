@@ -152,8 +152,6 @@ const getTripSpendingSummary = async (req, res) => {
       if (!userData[uid]) {
         userData[uid] = {
           userName: userObj.name,
-          alreadyPaid: 0,
-          yetToPay: 0,
           totalSpent: 0,
           totalSpentOnSelf: 0
         };
@@ -183,13 +181,7 @@ const getTripSpendingSummary = async (req, res) => {
 
         // Add to total spent
         userData[contributorId].totalSpent += c.amount;
-
-        // Add to yetToPay if not paid
-        if (!c.paymentDone) {
-          userData[contributorId].yetToPay += c.amount;
-        } else {
-          userData[contributorId].alreadyPaid += c.amount;
-        }
+        userData[contributorId].totalSpentOnSelf += c.amount;
       });
 
       // Remaining = what payer spent on themselves
@@ -203,7 +195,7 @@ const getTripSpendingSummary = async (req, res) => {
     const result = Object.values(userData);
 
 
-    res.status(200).json({ success: true, data: result,transactions });
+    res.status(200).json({ success: true, data: result});
 
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
