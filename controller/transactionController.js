@@ -236,6 +236,7 @@ const getTransactionsByTripId = async (req, res) => {
       .populate("paidBy", "name phoneNo")
       .populate("tripId", "name")
       .populate("contribution.userId", "name phoneNo")
+      .sort({"createdAt":-1})
       .select(["_id", "amount", "description", "paidBy", "tripId", "contribution", "createdAt"]);
     
     if (transactions.length === 0) {
