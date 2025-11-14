@@ -36,7 +36,7 @@ const createTrip = async (req, res) => {
 // View all trips
 const getAllTrips = async (req, res) => {
   try {
-    const trips = await tripModel.find({}).select(["_id", "name"]);
+    const trips = await tripModel.find({}).sort({"createdAt":-1}).select(["_id", "name"]);
     res.status(200).json({ success: true, data: trips });
   } catch (error) {
     sendError(res, 500, "Error fetching trips.");

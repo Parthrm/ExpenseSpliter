@@ -34,3 +34,10 @@ mongoose.connect(MONGOURL).then(()=>{
     console.log(`Example app listening on port ${PORT}`)
   })
 }).catch((error)=>console.error(error));
+
+// TODO : sort transactions in latest first order 
+// TODO : toggle for payment of contributor
+// TODO : update settlements to incorporate paid contri
+// TODO : to delete trip, also delete trans
+
+// TODO : minimum amt 1 for new tarnsaction

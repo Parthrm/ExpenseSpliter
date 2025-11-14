@@ -6,6 +6,7 @@ const {
   getTransactionById,
   updateTransaction,
   deleteTransaction,
+  updateContributionStatus,
 } = require("../controller/transactionController");
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.get("/", getAllTransactions);
 router.get("/trip/:tripId", getTransactionsByTripId);
 router.get("/:id", getTransactionById);
 router.put("/:id", updateTransaction);
+router.put('/:transactionId/contributions', updateContributionStatus);
 router.delete("/:id", deleteTransaction);
 
 module.exports = router;

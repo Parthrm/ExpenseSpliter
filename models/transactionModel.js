@@ -4,7 +4,7 @@ const transactionSchema = new mongoose.Schema({
   amount:{
     type:Number,
     required:true,
-    min:0
+    min:1
   },
   description:{
     type:String,
@@ -18,7 +18,7 @@ const transactionSchema = new mongoose.Schema({
   },
   tripId: {
     type:mongoose.Schema.Types.ObjectId,
-    ref:"User",
+    ref:"Trip",
     required:true
   },
   contribution:[{

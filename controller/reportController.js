@@ -16,8 +16,8 @@ function minTransactionCalculator(transactions) {
     // const totalContributed = contribution.reduce((sum, c) => sum + c.amount, 0);
 
     // Ignore the part the paidBy paid for themself (amount - totalContributed)
-    for (const { userId, amount: contribAmount } of contribution) {
-      if (userId === paidBy) continue; // contributor paying themselves → skip
+    for (const { userId, amount: contribAmount,paymentDone } of contribution) {
+      if (userId === paidBy || paymentDone) continue; // contributor paying themselves → skip
       balances[userId] = (balances[userId] || 0) - contribAmount; // owes
       balances[paidBy] = (balances[paidBy] || 0) + contribAmount;   // receives
     }
